@@ -69,7 +69,7 @@ class FormationRepository extends ServiceEntityRepository
      * @param type $table si $champ dans une autre table
      * @return Formation[]
      */
-    public function findByContainValue($champ, $valeur, $table=""): array{
+    public function findByContainValue($champ, $valeur, $table=""): array{       
         if($valeur==""){
             return $this->findAll();
         }
@@ -82,13 +82,13 @@ class FormationRepository extends ServiceEntityRepository
                     ->getResult();            
         }else{
             return $this->createQueryBuilder('f')
-                    ->join('f.'.$table, 't')                    
+                    ->join('f.'.$table, 't')
+                    ->orderBy('f.publishedAt', 'DESC')                   
                     ->where('t.'.$champ.' LIKE :valeur')
-                    ->orderBy('f.publishedAt', 'DESC')
                     ->setParameter('valeur', '%'.$valeur.'%')
                     ->getQuery()
                     ->getResult();                   
-        }       
+        }             
     }    
     
     /**
