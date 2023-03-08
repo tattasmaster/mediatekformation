@@ -52,12 +52,23 @@ class FormationRepository extends ServiceEntityRepository
                     ->orderBy('f.'.$champ, $ordre)
                     ->getQuery()
                     ->getResult();
-        }else{
+        }
+    }
+    
+    /**
+     * 
+     * @param type $champ
+     * @param type $ordre
+     * @param type $table
+     * @return array
+     */
+    public function findAllOrderBy2($champ, $ordre, $table=""): array{
+        if ($table != "") {
             return $this->createQueryBuilder('f')
                     ->join('f.'.$table, 't')
                     ->orderBy('t.'.$champ, $ordre)
                     ->getQuery()
-                    ->getResult();            
+                    ->getResult();
         }
     }
 
@@ -79,17 +90,31 @@ class FormationRepository extends ServiceEntityRepository
                     ->orderBy('f.publishedAt', 'DESC')
                     ->setParameter('valeur', '%'.$valeur.'%')
                     ->getQuery()
-                    ->getResult();            
-        }else{
+                    ->getResult();
+        }
+    }  
+    
+    /**
+     * 
+     * @param type $champ
+     * @param type $valeur
+     * @param type $table
+     * @return array
+     */
+    public function findByContainValue2($champ, $valeur, $table=""): array{       
+        if($valeur==""){
+            return $this->findAll();
+        }
+        if(table!=""){
             return $this->createQueryBuilder('f')
                     ->join('f.'.$table, 't')
                     ->orderBy('f.publishedAt', 'DESC')                   
                     ->where('t.'.$champ.' LIKE :valeur')
                     ->setParameter('valeur', '%'.$valeur.'%')
                     ->getQuery()
-                    ->getResult();                   
-        }             
-    }    
+                    ->getResult();
+        }
+    }
     
     /**
      * Retourne les n formations les plus récentes
