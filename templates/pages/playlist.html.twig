@@ -10,6 +10,13 @@
                     {{ playlist.name }}&nbsp;
                 {% endfor %}
             <br /><br />
+            <strong>Nombre de formations :</strong> 
+            {% set number = 0 %}
+            {% for formation in playlistformations %}
+                {% set number = number + 1 %} 
+            {% endfor %}
+            {{ number }}
+            <br /><br />
             <strong>description :</strong><br />
                 {{ playlist.description|nl2br }}
         </div>
@@ -33,6 +40,5 @@
                 </div>
             {% endfor %}
         </div>
-        
     </div>
 {% endblock %}
