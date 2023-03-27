@@ -1,0 +1,21 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block body %}
+    <table class="table table-striped">
+        <caption></caption>
+        <tbody>
+            {% for formation in formations %}                   
+                    <td class="text-left">
+                        {% for categorie in formation.categories %}
+                            {{ categorie.name }}<br />
+                        {% endfor %}
+                    </td>                    
+
+                    <td>
+                        <a href="{{ path('admin.categories.suppr', {id:formation.id}) }}" class="btn btn-danger" onclick="return confirm ('Etes-vous sûr(e) de vouloir supprimer {{formation.title}} ?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

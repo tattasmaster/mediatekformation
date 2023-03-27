@@ -64,7 +64,7 @@ class AdminPlaylistController extends AbstractController {
      * @return Response
      */
     public function suppr(Playlist $playlist): Response{
-        if (!$this->formations = null) {
+        if ($playlist->getFormations()->count() == 0) {
             $this->playlistRepository->remove($playlist, true);
             return $this->redirectToRoute('admin.playlists');
         }
