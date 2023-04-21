@@ -10,7 +10,7 @@ jobs:
       
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
-    with:
+      with:
         server: ftp.mediatek-atelier-tk.go.yj.fr
         server-dir: /public_html/mediatekformation-export/
         username: cfjuavzx
